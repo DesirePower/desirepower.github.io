@@ -1,0 +1,521 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <base href="https://ezshine.jnsii.com/cases/slowroads/" />
+    <link rel="icon" href="./favicon_circle.svg" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>
+      s&hairsp;l&hairsp;o&hairsp;w&nbsp;&nbsp;r&hairsp;o&hairsp;a&hairsp;d&hairsp;s
+    </title>
+    <meta
+      name="title"
+      content="s&hairsp;l&hairsp;o&hairsp;w  r&hairsp;o&hairsp;a&hairsp;d&hairsp;s"
+    />
+    <meta name="description" content="endless driving zen in your browser" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://slowroads.io/" />
+    <meta
+      property="og:title"
+      content="s&hairsp;l&hairsp;o&hairsp;w  r&hairsp;o&hairsp;a&hairsp;d&hairsp;s"
+    />
+    <meta
+      property="og:description"
+      content="endless driving zen in your browser"
+    />
+    <meta property="og:image" content="./img.jpg" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://slowroads.io/" />
+    <meta
+      property="twitter:title"
+      content="s&hairsp;l&hairsp;o&hairsp;w  r&hairsp;o&hairsp;a&hairsp;d&hairsp;s"
+    />
+    <meta
+      property="twitter:description"
+      content="endless driving zen in your browser"
+    />
+    <meta property="twitter:image" content="./img.jpg" />
+    <link rel="manifest" href="./manifest.json" />
+    <script src="./alea.min.js"></script>
+    <link href="./static/css/main.ac3cb8b3.chunk.css" rel="stylesheet" />
+    <style class="mpa-style-fix ImageGatherer">
+      .FotorFrame {
+        position: fixed !important;
+      }
+    </style>
+    <style class="mpa-style-fix SideFunctionPanel">
+      .weui-desktop-online-faq__wrp {
+        top: 304px !important;
+        bottom: unset !important;
+      }
+      .weui-desktop-online-faq__wrp .weui-desktop-online-faq__switch {
+        width: 38px !important;
+      }
+    </style>
+  </head>
+
+  <body
+    mpa-version="8.0.11"
+    mpa-extension-id="ibefaeehajgcpooopoegkifhgecigeeg"
+  >
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <div class="App">
+        <div id="game-main" tabindex="1" class="render-panel">
+          <div id="update-alert">
+            <div class="update-alert-title">New version available!</div>
+            Update with a hard refresh<br />(CTRL + F5)
+          </div>
+          <div id="game-ui" style="display: block">
+            <div id="control-prompt" style="opacity: 0"></div>
+            <div id="achievement" class=""></div>
+            <div id="ui-mouse" style="bottom: calc(24vh + 25px); display: none">
+              <div id="ui-mouse-prompt" style="display: none">
+                [ click to begin ]
+              </div>
+              <div id="ui-mouse-input">
+                <div class="ui-mouse-bar">
+                  <div class="ui-mouse-bar-line"></div>
+                  <div class="ui-mouse-bar-midline"></div>
+                </div>
+                <div id="ui-mouse-bar-marker">
+                  <div class="ui-mouse-bar-marker-tick"></div>
+                </div>
+              </div>
+              <div class="ui-mouse-bar-boundary"></div>
+              <div class="ui-mouse-reset">reset</div>
+            </div>
+            <div id="game-paused" style="display: block">
+              <div class="game-paused-main">PAUSED</div>
+            </div>
+            <div id="autodrive" class="">
+              <div class="autodrive-bar autodrive-bar-left"></div>
+              <div id="autodrive-button">autodrive off</div>
+              <div class="autodrive-bar autodrive-bar-right"></div>
+            </div>
+            <div id="menu-bar">
+              <div id="menu-bar-left">
+                <div class="menu-item" tabindex="-1">
+                  <img
+                    class="menu-icon"
+                    src="./static/media/globe.0021026f.svg"
+                    alt=""
+                    width="50%"
+                  />
+                </div>
+                <div class="menu-bar-vertical-divider"></div>
+                <div class="menu-item" tabindex="-1">
+                  <img
+                    class="menu-icon"
+                    src="./static/media/panorama.568dc952.svg"
+                    alt=""
+                    width="50%"
+                  />
+                </div>
+                <div class="menu-item" tabindex="-1">
+                  <img
+                    class="menu-icon"
+                    src="./static/media/v_config_1.45a9fb9a.svg"
+                    alt=""
+                    width="50%"
+                  />
+                </div>
+              </div>
+              <div id="menu-bar-right">
+                <a
+                  href="https://ko-fi.com/slowroads"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Support development on Ko-fi!"
+                  class="menu-item"
+                  style="
+                    padding: 0px 12px;
+                    width: auto;
+                    text-align: right;
+                    display: flex;
+                  "
+                  ><img
+                    alt=""
+                    src="./static/media/ico_kofi.0dd3be2c.svg"
+                    style="
+                      height: 50%;
+                      margin-top: 25px;
+                      margin-right: 8px;
+                      transform: translateY(-50%);
+                    "
+                  />
+                  <div style="font-size: 14px; color: rgb(255, 255, 255)">
+                    donate
+                  </div></a
+                >
+                <div class="menu-item" tabindex="-1">
+                  <img
+                    class="menu-icon"
+                    src="./static/media/controls.0048d852.svg"
+                    alt=""
+                    width="50%"
+                  />
+                </div>
+                <div class="menu-item" tabindex="-1">
+                  <img
+                    class="menu-icon"
+                    src="./static/media/vol_off.11497865.svg"
+                    alt=""
+                    width="50%"
+                  />
+                </div>
+                <div
+                  class="menu-item"
+                  style="
+                    padding: 0px 12px;
+                    width: auto;
+                    text-align: right;
+                    display: flex;
+                  "
+                >
+                  <img
+                    alt=""
+                    src="./static/media/feedback2.24052523.svg"
+                    style="
+                      height: 50%;
+                      margin-top: 25px;
+                      margin-right: 4px;
+                      transform: translateY(-50%);
+                    "
+                  />
+                </div>
+                <div class="menu-item" tabindex="-1">
+                  <img
+                    class="menu-icon"
+                    src="./static/media/config.fa1e0797.svg"
+                    alt=""
+                    width="50%"
+                  />
+                </div>
+                <div class="menu-bar-vertical-divider"></div>
+                <div class="menu-item">
+                  <img
+                    class="menu-icon"
+                    src="./static/media/favicon_circle_white.eb1953e3.svg"
+                    alt=""
+                    width="50%"
+                  />
+                </div>
+              </div>
+            </div>
+            <div id="main-stats">
+              <div id="ui-dist" class="ui-stat">
+                <span id="ui-dist-val" class="ui-stat-val">1.3</span>
+                <div class="ui-stat-unit">miles</div>
+                <div id="ui-dist-reset">
+                  <img
+                    id="ui-dist-reset-icon"
+                    alt=""
+                    src="./static/media/refresh.56c65653.svg"
+                  />
+                </div>
+              </div>
+              <div class="ui-stat-spacer"></div>
+              <div id="ui-speed" class="ui-stat">
+                <span id="ui-speed-val" class="ui-stat-val">18.6</span>
+                <div class="ui-stat-unit">mph</div>
+                <div id="ui-cruise-controls">
+                  <img
+                    id="ui-cruise-toggle"
+                    title="Toggle cruise control"
+                    alt=""
+                    src="./static/media/lock_open.2037b97e.svg"
+                  />
+                </div>
+              </div>
+            </div>
+            <div id="upcoming-container" style="opacity: 1">
+              <svg viewBox="0 0 160 120" width="100%" height="100%">
+                <g transform="translate(80 96) scale(-0.5 -0.5)">
+                  <polyline
+                    points="-1163.88 1317.73 -1164.05 1318.31 -1164.22 1318.9 -1164.4 1319.49 -1164.57 1320.07 -1164.74 1320.66 -1164.71 1321.28 -1164.69 1321.9 -1164.66 1322.52 -1164.63 1323.14 -1164.61 1323.76 -1164.58 1324.38 -1164.55 1325 -1164.53 1325.62 -1164.5 1326.24 -1164.47 1326.86 -1164.45 1327.48 -1164.42 1328.1 -1164.39 1328.72 -1164.37 1329.34 -1164.34 1329.96 -1164.31 1330.58 -1164.21 1331.2 -1164.1 1331.82 -1164 1332.43 -1163.9 1333.05 -1163.79 1333.66 -1163.69 1334.28 -1163.58 1334.9 -1163.48 1335.51 -1163.37 1336.13 -1163.27 1336.74 -1163.16 1337.36 -1163.06 1337.98 -1162.95 1338.59 -1162.85 1339.21 -1162.74 1339.83 -1162.64 1340.44 -1162.52 1341.06 -1162.4 1341.67 -1162.29 1342.28 -1162.17 1342.9 -1162.05 1343.51 -1161.93 1344.12 -1161.82 1344.74 -1161.7 1345.35 -1161.58 1345.97 -1161.46 1346.58 -1161.35 1347.19 -1161.23 1347.81 -1161.11 1348.42 -1160.99 1349.03 -1160.88 1349.65 -1160.76 1350.26 -1160.62 1350.87 -1160.48 1351.48 -1160.34 1352.09 -1160.2 1352.7 -1160.06 1353.31 -1159.92 1353.92 -1159.79 1354.53 -1159.65 1355.14 -1159.51 1355.74 -1159.37 1356.35 -1159.23 1356.96 -1159.09 1357.57 -1158.95 1358.18 -1158.81 1358.79 -1158.67 1359.4 -1158.53 1360.01 -1158.38 1360.62 -1158.23 1361.22 -1158.08 1361.83 -1157.93 1362.43 -1157.78 1363.04 -1157.62 1363.65 -1157.47 1364.25 -1157.32 1364.86 -1157.17 1365.47 -1157.02 1366.07 -1156.87 1366.68 -1156.71 1367.28 -1156.56 1367.89 -1156.41 1368.5 -1156.26 1369.1 -1156.11 1369.71 -1155.98 1370.32 -1155.84 1370.93 -1155.71 1371.54 -1155.58 1372.15 -1155.45 1372.76 -1155.32 1373.37 -1155.18 1373.98 -1155.05 1374.59 -1154.92 1375.21 -1154.79 1375.82 -1154.66 1376.43 -1154.52 1377.04 -1154.39 1377.65 -1154.26 1378.26 -1154.13 1378.87 -1154 1379.48 -1153.92 1380.1 -1153.84 1380.72 -1153.77 1381.34 -1153.69 1381.96 -1153.61 1382.58 -1153.54 1383.19 -1153.46 1383.81 -1153.38 1384.43 -1153.3 1385.05 -1153.23 1385.67 -1153.15 1386.29 -1153.07 1386.91 -1153 1387.53 -1152.92 1388.15 -1152.84 1388.77 -1152.77 1389.39 -1152.77 1390.01 -1152.78 1390.63 -1152.78 1391.26 -1152.79 1391.88 -1152.79 1392.5 -1152.8 1393.13 -1152.8 1393.75 -1152.81 1394.37 -1152.81 1395 -1152.82 1395.62 -1152.82 1396.24 -1152.83 1396.87 -1152.83 1397.49 -1152.84 1398.11 -1152.84 1398.74 -1152.85 1399.36 -1152.9 1399.98 -1152.95 1400.61 -1153 1401.23 -1153.05 1401.85 -1153.11 1402.47 -1153.16 1403.1 -1153.21 1403.72 -1153.26 1404.34 -1153.31 1404.97 -1153.36 1405.59 -1153.42 1406.21 -1153.47 1406.83 -1153.52 1407.46 -1153.57 1408.08 -1153.62 1408.7 -1153.67 1409.33 -1153.73 1409.95 -1153.78 1410.57 -1153.83 1411.19 -1153.89 1411.82 -1153.94 1412.44 -1153.99 1413.06 -1154.05 1413.68 -1154.1 1414.31 -1154.15 1414.93 -1154.21 1415.55 -1154.26 1416.18 -1154.31 1416.8 -1154.37 1417.42 -1154.42 1418.04 -1154.48 1418.67 -1154.53 1419.29 -1154.58 1419.91 -1154.63 1420.53 -1154.69 1421.16 -1154.74 1421.78 -1154.79 1422.4 -1154.85 1423.03 -1154.9 1423.65 -1154.95 1424.27 -1155.01 1424.89 -1155.06 1425.52 -1155.11 1426.14 -1155.17 1426.76 -1155.22 1427.38 -1155.27 1428.01 -1155.33 1428.63 -1155.38 1429.25 -1155.43 1429.88 -1155.48 1430.5 -1155.53 1431.12 -1155.58 1431.74 -1155.64 1432.37 -1155.69 1432.99 -1155.74 1433.61 -1155.79 1434.24 -1155.84 1434.86 -1155.89 1435.48 -1155.94 1436.1 -1156 1436.73 -1156.05 1437.35 -1156.1 1437.97 -1156.15 1438.6 -1156.2 1439.22 -1156.24 1439.84 -1156.28 1440.47 -1156.31 1441.09 -1156.35 1441.71 -1156.39 1442.34 -1156.42 1442.96 -1156.46 1443.59 -1156.5 1444.21 -1156.54 1444.83 -1156.57 1445.46 -1156.61 1446.08 -1156.65 1446.7 -1156.68 1447.33 -1156.72 1447.95 -1156.76 1448.58 -1156.8 1449.2 -1156.77 1449.82 -1156.73 1450.44 -1156.7 1451.06 -1156.67 1451.69 -1156.64 1452.31 -1156.61 1452.93 -1156.58 1453.55 -1156.55 1454.17 -1156.52 1454.79 -1156.49 1455.42 -1156.45 1456.04 -1156.42 1456.66 -1156.39 1457.28 -1156.36 1457.9 -1156.33 1458.53 -1156.3 1459.15 -1156.19 1459.76 -1156.09 1460.38 -1155.98 1460.99 -1155.88 1461.61 -1155.77 1462.23 -1155.67 1462.84 -1155.56 1463.46 -1155.46 1464.07 -1155.35 1464.69 -1155.25 1465.3 -1155.14 1465.92 -1155.03 1466.54 -1154.93 1467.15 -1154.82 1467.77 -1154.72 1468.38 -1154.61 1469 -1154.49 1469.61 -1154.37 1470.22 -1154.24 1470.84 -1154.12 1471.45 -1154 1472.06 -1153.87 1472.68 -1153.75 1473.29 -1153.63 1473.9 -1153.5 1474.51 -1153.38 1475.13"
+                    transform="rotate(-19.09756357819971) translate(1163.882080078125 -1317.7259521484375)"
+                    stroke="#2224"
+                    stroke-width="24"
+                    stroke-linecap="round"
+                    fill="none"
+                  ></polyline>
+                  <polyline
+                    points="-1163.88 1317.73 -1164.05 1318.31 -1164.22 1318.9 -1164.4 1319.49 -1164.57 1320.07 -1164.74 1320.66 -1164.71 1321.28 -1164.69 1321.9 -1164.66 1322.52 -1164.63 1323.14 -1164.61 1323.76 -1164.58 1324.38 -1164.55 1325 -1164.53 1325.62 -1164.5 1326.24 -1164.47 1326.86 -1164.45 1327.48 -1164.42 1328.1 -1164.39 1328.72 -1164.37 1329.34 -1164.34 1329.96 -1164.31 1330.58 -1164.21 1331.2 -1164.1 1331.82 -1164 1332.43 -1163.9 1333.05 -1163.79 1333.66 -1163.69 1334.28 -1163.58 1334.9 -1163.48 1335.51 -1163.37 1336.13 -1163.27 1336.74 -1163.16 1337.36 -1163.06 1337.98 -1162.95 1338.59 -1162.85 1339.21 -1162.74 1339.83 -1162.64 1340.44 -1162.52 1341.06 -1162.4 1341.67 -1162.29 1342.28 -1162.17 1342.9 -1162.05 1343.51 -1161.93 1344.12 -1161.82 1344.74 -1161.7 1345.35 -1161.58 1345.97 -1161.46 1346.58 -1161.35 1347.19 -1161.23 1347.81 -1161.11 1348.42 -1160.99 1349.03 -1160.88 1349.65 -1160.76 1350.26 -1160.62 1350.87 -1160.48 1351.48 -1160.34 1352.09 -1160.2 1352.7 -1160.06 1353.31 -1159.92 1353.92 -1159.79 1354.53 -1159.65 1355.14 -1159.51 1355.74 -1159.37 1356.35 -1159.23 1356.96 -1159.09 1357.57 -1158.95 1358.18 -1158.81 1358.79 -1158.67 1359.4 -1158.53 1360.01 -1158.38 1360.62 -1158.23 1361.22 -1158.08 1361.83 -1157.93 1362.43 -1157.78 1363.04 -1157.62 1363.65 -1157.47 1364.25 -1157.32 1364.86 -1157.17 1365.47 -1157.02 1366.07 -1156.87 1366.68 -1156.71 1367.28 -1156.56 1367.89 -1156.41 1368.5 -1156.26 1369.1 -1156.11 1369.71 -1155.98 1370.32 -1155.84 1370.93 -1155.71 1371.54 -1155.58 1372.15 -1155.45 1372.76 -1155.32 1373.37 -1155.18 1373.98 -1155.05 1374.59 -1154.92 1375.21 -1154.79 1375.82 -1154.66 1376.43 -1154.52 1377.04 -1154.39 1377.65 -1154.26 1378.26 -1154.13 1378.87 -1154 1379.48 -1153.92 1380.1 -1153.84 1380.72 -1153.77 1381.34 -1153.69 1381.96 -1153.61 1382.58 -1153.54 1383.19 -1153.46 1383.81 -1153.38 1384.43 -1153.3 1385.05 -1153.23 1385.67 -1153.15 1386.29 -1153.07 1386.91 -1153 1387.53 -1152.92 1388.15 -1152.84 1388.77 -1152.77 1389.39 -1152.77 1390.01 -1152.78 1390.63 -1152.78 1391.26 -1152.79 1391.88 -1152.79 1392.5 -1152.8 1393.13 -1152.8 1393.75 -1152.81 1394.37 -1152.81 1395 -1152.82 1395.62 -1152.82 1396.24 -1152.83 1396.87 -1152.83 1397.49 -1152.84 1398.11 -1152.84 1398.74 -1152.85 1399.36 -1152.9 1399.98 -1152.95 1400.61 -1153 1401.23 -1153.05 1401.85 -1153.11 1402.47 -1153.16 1403.1 -1153.21 1403.72 -1153.26 1404.34 -1153.31 1404.97 -1153.36 1405.59 -1153.42 1406.21 -1153.47 1406.83 -1153.52 1407.46 -1153.57 1408.08 -1153.62 1408.7 -1153.67 1409.33 -1153.73 1409.95 -1153.78 1410.57 -1153.83 1411.19 -1153.89 1411.82 -1153.94 1412.44 -1153.99 1413.06 -1154.05 1413.68 -1154.1 1414.31 -1154.15 1414.93 -1154.21 1415.55 -1154.26 1416.18 -1154.31 1416.8 -1154.37 1417.42 -1154.42 1418.04 -1154.48 1418.67 -1154.53 1419.29 -1154.58 1419.91 -1154.63 1420.53 -1154.69 1421.16 -1154.74 1421.78 -1154.79 1422.4 -1154.85 1423.03 -1154.9 1423.65 -1154.95 1424.27 -1155.01 1424.89 -1155.06 1425.52 -1155.11 1426.14 -1155.17 1426.76 -1155.22 1427.38 -1155.27 1428.01 -1155.33 1428.63 -1155.38 1429.25 -1155.43 1429.88 -1155.48 1430.5 -1155.53 1431.12 -1155.58 1431.74 -1155.64 1432.37 -1155.69 1432.99 -1155.74 1433.61 -1155.79 1434.24 -1155.84 1434.86 -1155.89 1435.48 -1155.94 1436.1 -1156 1436.73 -1156.05 1437.35 -1156.1 1437.97 -1156.15 1438.6 -1156.2 1439.22 -1156.24 1439.84 -1156.28 1440.47 -1156.31 1441.09 -1156.35 1441.71 -1156.39 1442.34 -1156.42 1442.96 -1156.46 1443.59 -1156.5 1444.21 -1156.54 1444.83 -1156.57 1445.46 -1156.61 1446.08 -1156.65 1446.7 -1156.68 1447.33 -1156.72 1447.95 -1156.76 1448.58 -1156.8 1449.2 -1156.77 1449.82 -1156.73 1450.44 -1156.7 1451.06 -1156.67 1451.69 -1156.64 1452.31 -1156.61 1452.93 -1156.58 1453.55 -1156.55 1454.17 -1156.52 1454.79 -1156.49 1455.42 -1156.45 1456.04 -1156.42 1456.66 -1156.39 1457.28 -1156.36 1457.9 -1156.33 1458.53 -1156.3 1459.15 -1156.19 1459.76 -1156.09 1460.38 -1155.98 1460.99 -1155.88 1461.61 -1155.77 1462.23 -1155.67 1462.84 -1155.56 1463.46 -1155.46 1464.07 -1155.35 1464.69 -1155.25 1465.3 -1155.14 1465.92 -1155.03 1466.54 -1154.93 1467.15 -1154.82 1467.77 -1154.72 1468.38 -1154.61 1469 -1154.49 1469.61 -1154.37 1470.22 -1154.24 1470.84 -1154.12 1471.45 -1154 1472.06 -1153.87 1472.68 -1153.75 1473.29 -1153.63 1473.9 -1153.5 1474.51 -1153.38 1475.13"
+                    transform="rotate(-19.09756357819971) translate(1163.882080078125 -1317.7259521484375)"
+                    stroke="#fff9"
+                    stroke-width="12"
+                    stroke-linecap="round"
+                    fill="none"
+                  ></polyline>
+                  <circle
+                    fill="#444"
+                    r="3"
+                    cx="-1163.882080078125"
+                    cy="1317.7259521484375"
+                    transform="rotate(-19.09756357819971) translate(1163.882080078125 -1317.7259521484375)"
+                  ></circle>
+                </g>
+              </svg>
+            </div>
+            <div id="game-ui-backing"></div>
+          </div>
+          <div id="ui-debug">
+            <div class="ui-debug-row">
+              <div class="ui-debug-label">Position:</div>
+              <div id="ui-debug-position">1, 2, 3</div>
+            </div>
+            <div class="ui-debug-row">
+              <div class="ui-debug-label">Far Coords:</div>
+              <div id="ui-debug-far-coords">1, 2, 3</div>
+            </div>
+            <div class="ui-debug-row">
+              <div class="ui-debug-label">Vehicle Node:</div>
+              <div id="ui-debug-node">1</div>
+            </div>
+            <div class="ui-debug-row">
+              <div class="ui-debug-label">Midline Tail:</div>
+              <div id="ui-debug-midline-tail">123</div>
+            </div>
+            <hr />
+          </div>
+          <canvas
+            class="render-canvas"
+            tabindex="-1"
+            data-engine="three.js r144"
+            width="1681"
+            height="1452"
+            style="width: 1681.5px; height: 1452px"
+          ></canvas>
+        </div>
+      </div>
+    </div>
+    <script>
+      !(function (e) {
+        function r(r) {
+          for (
+            var n, a, i = r[0], c = r[1], l = r[2], f = 0, s = [];
+            f < i.length;
+            f++
+          )
+            (a = i[f]),
+              Object.prototype.hasOwnProperty.call(o, a) &&
+                o[a] &&
+                s.push(o[a][0]),
+              (o[a] = 0);
+          for (n in c)
+            Object.prototype.hasOwnProperty.call(c, n) && (e[n] = c[n]);
+          for (p && p(r); s.length; ) s.shift()();
+          return u.push.apply(u, l || []), t();
+        }
+        function t() {
+          for (var e, r = 0; r < u.length; r++) {
+            for (var t = u[r], n = !0, i = 1; i < t.length; i++) {
+              var c = t[i];
+              0 !== o[c] && (n = !1);
+            }
+            n && (u.splice(r--, 1), (e = a((a.s = t[0]))));
+          }
+          return e;
+        }
+        var n = {},
+          o = { 1: 0 },
+          u = [];
+        function a(r) {
+          if (n[r]) return n[r].exports;
+          var t = (n[r] = { i: r, l: !1, exports: {} });
+          return e[r].call(t.exports, t, t.exports, a), (t.l = !0), t.exports;
+        }
+        (a.e = function (e) {
+          var r = [],
+            t = o[e];
+          if (0 !== t)
+            if (t) r.push(t[2]);
+            else {
+              var n = new Promise(function (r, n) {
+                t = o[e] = [r, n];
+              });
+              r.push((t[2] = n));
+              var u,
+                i = document.createElement("script");
+              (i.charset = "utf-8"),
+                (i.timeout = 120),
+                a.nc && i.setAttribute("nonce", a.nc),
+                (i.src = (function (e) {
+                  return (
+                    a.p +
+                    "static/js/" +
+                    ({}[e] || e) +
+                    "." +
+                    { 3: "7a0cc4e7" }[e] +
+                    ".chunk.js"
+                  );
+                })(e));
+              var c = new Error();
+              u = function (r) {
+                (i.onerror = i.onload = null), clearTimeout(l);
+                var t = o[e];
+                if (0 !== t) {
+                  if (t) {
+                    var n = r && ("load" === r.type ? "missing" : r.type),
+                      u = r && r.target && r.target.src;
+                    (c.message =
+                      "Loading chunk " +
+                      e +
+                      " failed.\n(" +
+                      n +
+                      ": " +
+                      u +
+                      ")"),
+                      (c.name = "ChunkLoadError"),
+                      (c.type = n),
+                      (c.request = u),
+                      t[1](c);
+                  }
+                  o[e] = void 0;
+                }
+              };
+              var l = setTimeout(function () {
+                u({ type: "timeout", target: i });
+              }, 12e4);
+              (i.onerror = i.onload = u), document.head.appendChild(i);
+            }
+          return Promise.all(r);
+        }),
+          (a.m = e),
+          (a.c = n),
+          (a.d = function (e, r, t) {
+            a.o(e, r) ||
+              Object.defineProperty(e, r, { enumerable: !0, get: t });
+          }),
+          (a.r = function (e) {
+            "undefined" != typeof Symbol &&
+              Symbol.toStringTag &&
+              Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }),
+              Object.defineProperty(e, "__esModule", { value: !0 });
+          }),
+          (a.t = function (e, r) {
+            if ((1 & r && (e = a(e)), 8 & r)) return e;
+            if (4 & r && "object" == typeof e && e && e.__esModule) return e;
+            var t = Object.create(null);
+            if (
+              (a.r(t),
+              Object.defineProperty(t, "default", { enumerable: !0, value: e }),
+              2 & r && "string" != typeof e)
+            )
+              for (var n in e)
+                a.d(
+                  t,
+                  n,
+                  function (r) {
+                    return e[r];
+                  }.bind(null, n)
+                );
+            return t;
+          }),
+          (a.n = function (e) {
+            var r =
+              e && e.__esModule
+                ? function () {
+                    return e.default;
+                  }
+                : function () {
+                    return e;
+                  };
+            return a.d(r, "a", r), r;
+          }),
+          (a.o = function (e, r) {
+            return Object.prototype.hasOwnProperty.call(e, r);
+          }),
+          (a.p = "./"),
+          (a.oe = function (e) {
+            throw (console.error(e), e);
+          });
+        var i = (this.webpackJsonpapp = this.webpackJsonpapp || []),
+          c = i.push.bind(i);
+        (i.push = r), (i = i.slice());
+        for (var l = 0; l < i.length; l++) r(i[l]);
+        var p = c;
+        t();
+      })([]);
+    </script>
+    <script src="./static/js/2.5d519057.chunk.js"></script>
+    <script src="./static/js/main.131c9059.chunk.js"></script>
+
+    <div
+      class="mpa-sc mpa-plugin-article-gatherer mpa-new mpa-rootsc"
+      data-z="100"
+      style="display: block"
+      id="mpa-rootsc-article-gatherer"
+    ></div>
+    <div
+      class="mpa-sc mpa-plugin-image-gatherer mpa-new mpa-rootsc"
+      data-z="100"
+      style="display: block"
+      id="mpa-rootsc-image-gatherer"
+    ></div>
+    <div
+      class="mpa-sc mpa-plugin-page-clipper mpa-new mpa-rootsc"
+      data-z="100"
+      style="display: block"
+      id="mpa-rootsc-page-clipper"
+    ></div>
+    <div
+      class="mpa-sc mpa-plugin-text-gatherer mpa-new mpa-rootsc"
+      data-z="100"
+      style="display: block"
+      id="mpa-rootsc-text-gatherer"
+    ></div>
+    <div
+      class="mpa-sc mpa-plugin-video-gatherer mpa-new mpa-rootsc"
+      data-z="100"
+      style="display: block"
+      id="mpa-rootsc-video-gatherer"
+    ></div>
+    <div
+      class="mpa-sc mpa-plugin-side-function-panel mpa-new mpa-rootsc"
+      data-z="110"
+      style="display: block"
+      id="mpa-rootsc-side-function-panel"
+    ></div>
+    <div
+      class="mpa-sc mpa-plugin-notifier mpa-new mpa-rootsc"
+      data-z="120"
+      style="display: block"
+      id="mpa-rootsc-notifier"
+    ></div>
+    <div
+      class="mpa-sc mpa-plugin-notification-manager mpa-new mpa-rootsc"
+      data-z="130"
+      style="display: block"
+      id="mpa-rootsc-notification-manager"
+    ></div>
+    <div
+      style="
+        position: fixed;
+        top: 0px;
+        cursor: pointer;
+        opacity: 0.9;
+        z-index: 10000;
+        right: 0px;
+        display: none;
+      "
+    >
+      <canvas
+        width="160"
+        height="96"
+        style="width: 80px; height: 48px; display: block"
+      ></canvas
+      ><canvas
+        width="160"
+        height="96"
+        style="width: 80px; height: 48px; display: none"
+      ></canvas
+      ><canvas
+        width="160"
+        height="96"
+        style="width: 80px; height: 48px; display: none"
+      ></canvas>
+    </div>
+  </body>
+</html>

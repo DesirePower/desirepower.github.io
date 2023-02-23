@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        width: 400px;
+        height: 400px;
+        background-color: #bbada0;
+        position: relative;
+      }
+
+      .tile {
+        width: 100px;
+        height: 100px;
+        background-color: #cdc1b4;
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 36px;
+        text-align: center;
+        line-height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <!-- 共16个tile，表示游戏界面的16个方块 -->
+    </div>
+    <script>
+      // 初始化游戏界面
+      function init() {
+        // 随机生成两个方块
+        generateTile();
+        generateTile();
+      }
+
+      // 随机生成一个方块
+      function generateTile() {
+        // 随机生成位置
+        var randomX = Math.floor(Math.random() * 4);
+        var randomY = Math.floor(Math.random() * 4);
+
+        // 如果该位置已经有方块了，则重新生成位置
+        if (tiles[randomX][randomY] != 0) {
+          generateTile();
+        } else {
+          // 创建新方块并设置位置
+          var tile = document.createElement("div");
+          tile.className = "tile";
+          tile.id = "tile-" + randomX + "-" + randomY;
+          tile.innerText = "2";
+          var container = document.getElementById("container");
+          container.appendChild(tile);
+          tile.style.top = randomX * 100 + "px";
+          tile.style.left = randomY * 100 + "px";
+          tiles[randomX][randomY] = 2;
+        }
+      }
+
+      // 处理方块合并事件
+      function merge(direction) {
+        switch (direction) {
+          case "left":
+            for (var i = 0; i < 4; i++) {
+              for (var j = 0; j < 3; j++) {
+                if (tiles[i][j] != 0 && tiles[i][j] == tiles[i][j + 1]) {
+                  // 合并相邻的方块
+                  tiles[i][j] *= 2;
+                  tiles[i][j + 1] = 0;
+                  var tile1 = document.getElementById("tile-" + i + "-" + j);
+                  var tile2 = document.getElementById(
+                    "tile-" + i + "-" + (j + 1)
+                  );
+                  tile1.innerText = tiles[i][j];
+                  tile2.parentNode.removeChild(tile2);
+                }
+              }
+            }
+            break;
+          case "right":
+            for (var i = 0; i < 4; i++) {
+              for (var j = 3; j > 0; j--) {
+                if (tiles[i][j] != 0 && tiles[i][j] == tiles[i][j - 1]) {
+                  // 合并相邻的方块
+                  tiles[i][j] *= 2;
+                  tiles[i][j - 1] = 0;
+                  var tile1 = document.getElementById("tile-" + i + "-" + j);
+                  var tile2 = document.getElementById(
+                    "tile-" + i + "-" + (j - 1)
+                  );
+                  tile1.innerText = tiles[i][j];
+                  tile2.parentNode.removeChild(tile2);
+                }
+              }
+            }
+            break;
+          case "up":
+            for (var i = 0; i < 3; i++) {
+              for (var j = 0; j < 4; j++) {
+                if (tiles[i][j] != 0 && tiles[i][j] == tiles[i + 1][j]) {
+                  // 合并相邻的方块
+                  tiles[i][j] *= 2;
+                  tiles[i + 1][j] = 0;
+                  var tile1 = document.getElementById("tile-" + i + "-" + j);
+                  var tile2 = document.getElementById(
+                    "tile-" + (i + 1) + "-" + j
+                  );
+                  tile1.innerText = tiles[i][j];
+                  tile2.parentNode.removeChild(tile2);
+                }
+              }
+            }
+            break;
+          case "down":
+            for (var i = 3; i > 0; i--) {
+              for (var j = 0; j < 4; j++) {
+                if (tiles[i][j] != 0 && tiles[i][j] == tiles[i - 1][j]) {
+                  // 合并相邻的方块
+                  tiles[i][j] *= 2;
+                  tiles[i - 1][j] = 0;
+                  var tile1 = document.getElementById("tile-" + i + "-" + j);
+                  var tile2 = document.getElementById(
+                    "tile-" + (i - 1) + "-" + j
+                  );
+                  tile1.innerText = tiles[i][j];
+                  tile2.parentNode.removeChild(tile2);
+                }
+              }
+            }
+            break;
+        }
+        // 移动方块后再次随机生成方块
+        generateTile();
+      }
+			init()
+    </script>
+  </body>
+</html>

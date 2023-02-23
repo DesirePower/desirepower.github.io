@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>年画</title>
+    <style>
+      body {
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        background-color: #efefef;
+      }
+
+      .main {
+        width: 375px;
+        height: 667px;
+        background-color: white;
+        margin: 50px auto;
+        position: relative;
+        border-radius: 10px;
+      }
+
+      .tool {
+        position: absolute;
+        bottom: 30px;
+        text-align: center;
+        width: 100%;
+        z-index: 2;
+      }
+
+      .tool .btn {
+        display: inline-block;
+        padding: 3px 1em;
+        font-size: 14px;
+        background-color: #ffeedc;
+        color: #ddb196;
+        border-radius: 10px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      #canvas_temp {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      #canvas {
+        z-index: 1;
+        position: relative;
+      }
+
+      @media (max-width: 600px) {
+        .main {
+          width: 100%;
+          height: 100vh;
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <canvas id="canvas_temp"></canvas>
+      <canvas id="canvas"></canvas>
+      <img
+        id="winking"
+        src="https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b2a990d5a79e43c6b8313b01b5de11ad~tplv-k3u1fbpfcp-watermark.image?"
+        style="display: none"
+        alt=""
+      />
+      <div class="tool">
+        <div class="btn back" onclick="back()">撤销</div>
+      </div>
+    </div>
+    <script>
+      class RabbitPainting {
+        constructor() {}
+        init() {
+          this.canvas = document.getElementById("canvas");
+          this.ctx = this.canvas.getContext("2d");
+
+          this.tempCanvas = document.getElementById("canvas_temp");
+          this.tempCtx = this.tempCanvas.getContext("2d");
+
+          this.pcEvents = ["mousedown", "mousemove", "mouseup"];
+          this.mobileEvents = ["touchstart", "touchmove", "touchend"];
+          this.imgPoints = [
+            [0, 0, 120, 75, 115, 220, 120, 75],
+            [120, 0, 120, 75, 115, 220, 120, 75],
+            [240, 0, 120, 75, 115, 220, 120, 75],
+            [360, 0, 120, 75, 115, 220, 120, 75],
+            [480, 0, 120, 75, 115, 220, 120, 75],
+            [600, 0, 120, 75, 115, 220, 120, 75],
+          ];
+          this.execStack = [];
+          this.execStep = {};
+          this.curImg = 0;
+          this.tipPathColor = ["#ffede3", "#dfcdc1"];
+          this.canEdit = false;
+          this.imageData = [];
+          this.tempImageData = [];
+          this.curStep = 1;
+          this.timer;
+          this.isApp = this.isMobile();
+
+          this.onresize();
+          window.onresize = this.onresize.bind(this);
+          this.drawCanvas();
+          this.drawEyes();
+
+          Rabbit.drawSteps(this.curStep);
+        }
+        onresize() {
+          const { canvas, tempCanvas } = this;
+          const main = document.getElementsByClassName("main")[0];
+          if (canvas.width != main.clientWidth) {
+            canvas.width = main.clientWidth;
+          }
+          if (canvas.height != main.clientHeight) {
+            canvas.height = main.clientHeight;
+          }
+          if (tempCanvas.width != main.clientWidth) {
+            tempCanvas.width = main.clientWidth;
+          }
+          if (tempCanvas.height != main.clientHeight) {
+            tempCanvas.height = main.clientHeight;
+          }
+          if (this.isApp != this.isMobile()) {
+            this.drawCanvas();
+            this.isApp = this.isMobile();
+          }
+        }
+        isMobile() {
+          let userAgentInfo = navigator.userAgent;
+          let Agents = [
+            "Android",
+            "iPhone",
+            "SymbianOS",
+            "Windows Phone",
+            "iPad",
+            "iPod",
+          ];
+          let getArr = Agents.filter((i) => userAgentInfo.includes(i));
+          return getArr.length ? true : false;
+        }
+        animate(type, nextStep) {
+          const { ctx, curStep, tempCtx, canvas } = this;
+          const execStack = JSON.parse(JSON.stringify(this.execStack)).map(
+            (item) => {
+              item.curIndex = 2;
+              return item;
+            }
+          );
+          let speed = 3;
+          let curDeg = 0;
+          let curDirect = "left";
+          let curIndex = 2;
+          let animateKey;
+          let lastTime = new Date().getTime();
+          const fps = Math.floor(1000 / 30);
+          const rotateAnimate = () => {
+            let curTime = new Date().getTime();
+            if (curTime - lastTime >= fps) {
+              lastTime = curTime;
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              const getCurDeg = (item, degs) => {
+                if (!item.curDirect) {
+                  item.curDirect = "left";
+                }
+                if (typeof item.curDeg != "number") {
+                  item.curDeg = 0;
+                }
+                item.curSpeed = Math.floor(
+                  Math.abs(
+                    (degs[item.curDirect == "left" ? 0 : 1] - item.curDeg) /
+                      speed
+                  )
+                );
+                item.curSpeed = item.curSpeed <= 1 ? 1 : item.curSpeed;
+                if (item.curDirect == "left") {
+                  if (item.curDeg < degs[0]) {
+                    item.curDeg += item.curSpeed;
+                  } else {
+                    item.curDirect = "right";
+                    item.curIndex--;
+                  }
+                } else if (item.curDirect == "right") {
+                  if (item.curDeg > degs[1]) {
+                    item.curDeg -= item.curSpeed;
+                  } else {
+                    item.curDirect = "left";
+                  }
+                }
+              };
+              const rotateCanvas = (centerPoints, item) => {
+                ctx.save();
+                ctx.translate(...centerPoints);
+                ctx.rotate((Math.PI / 180) * item.curDeg);
+                ctx.translate(-centerPoints[0], -centerPoints[1]);
+              };
+              execStack.forEach((item) => {
+                if (item.type == "line") {
+                  switch (type) {
+                    case "ears_1": {
+                      if (item.step == 1 || item.step == 2) {
+                        getCurDeg(item, [20, -12]);
+                        rotateCanvas(
+                          this.execStep[item.step].centerPoints[0],
+                          item
+                        );
+                      }
+                      break;
+                    }
+                    case "shake_head": {
+                      if (item.step >= 1 && item.step <= 4) {
+                        if (item.step == 1) {
+                          getCurDeg(item, [5, -20]);
+                        } else if (item.step == 2) {
+                          getCurDeg(item, [30, -5]);
+                        } else {
+                          getCurDeg(item, [5, -5]);
+                        }
+                        const point = this.execStep[3];
+                        rotateCanvas(point.centerPoints[0], item);
+                      }
+                      break;
+                    }
+                    case "shake_body": {
+                      if (item.step == 1) {
+                        getCurDeg(item, [5, -20]);
+                      } else if (item.step == 2) {
+                        getCurDeg(item, [30, -5]);
+                      } else if (item.step == 3 || item.step == 4) {
+                        getCurDeg(item, [5, -5]);
+                      } else if (item.step == 5) {
+                        getCurDeg(item, [8, 0]);
+                      } else if (item.step == 6) {
+                        getCurDeg(item, [0, -12]);
+                      }
+                      if (item.step < 5) {
+                        const point = this.execStep[3];
+                        rotateCanvas(point.centerPoints[0], item);
+                      } else {
+                        rotateCanvas(
+                          this.execStep[item.step].centerPoints[0],
+                          item
+                        );
+                      }
+                      break;
+                    }
+                  }
+
+                  item.points.forEach((point) => {
+                    this.drawLine(point);
+                  });
+                  ctx.restore();
+                }
+              });
+              this.curImg =
+                this.curImg > this.imgPoints.length - 2 ? 0 : this.curImg + 1;
+              this.drawEyes();
+            }
+            animateKey = requestAnimationFrame(rotateAnimate);
+            if (
+              !execStack.find(
+                (item) =>
+                  item.type == "line" &&
+                  (typeof item.curIndex != "number" || item.curIndex > 0)
+              )
+            ) {
+              if (animateKey) {
+                cancelAnimationFrame(animateKey);
+                this.curImg = 0;
+                execStack.forEach((item) => (item.curIndex = 2));
+                if (nextStep) {
+                  this.canEdit = true;
+                  this.curStep = nextStep;
+                }
+                this.execCanvas();
+              }
+            }
+          };
+          rotateAnimate();
+        }
+        drawEyes() {
+          const { imgPoints, curImg } = this;
+          const point = imgPoints[curImg];
+          if (this.img) {
+            this.ctx.drawImage(this.img, ...point);
+          } else {
+            const img = document.getElementById("winking");
+            img.onload = () => {
+              console.log("load");
+              this.img = img;
+              this.ctx.drawImage(img, ...point);
+            };
+          }
+        }
+        drawCanvas() {
+          const events = this.isMobile() ? this.mobileEvents : this.pcEvents;
+          const { canvas, ctx } = this;
+          const _this = this;
+          canvas.addEventListener(events[0], function (e) {
+            let startX, startY;
+            if (!_this.isMobile()) {
+              startX = e.offsetX;
+              startY = e.offsetY;
+            } else {
+              startX = Math.floor(e.touches[0].clientX);
+              startY = Math.floor(e.touches[0].clientY);
+            }
+            const points = [];
+            let mousemove;
+            const mousemoveEvent = (bool) => {
+              if (!mousemove) {
+                mousemove = (e) => {
+                  if (bool) {
+                    let endX, endY;
+                    if (!_this.isMobile()) {
+                      endX = e.offsetX;
+                      endY = e.offsetY;
+                    } else {
+                      endX = Math.floor(e.touches[0].clientX);
+                      endY = Math.floor(e.touches[0].clientY);
+                    }
+                    if (
+                      _this.execStep[_this.curStep].tempImageData.find(
+                        (item) => item[0] == endX && item[1] == endY
+                      )
+                    ) {
+                      const point = {
+                        startX,
+                        startY,
+                        endX,
+                        endY,
+                        style: {
+                          lineWidth: "5",
+                          strokeStyle: "#000000",
+                        },
+                      };
+                      _this.drawLine(point);
+                      points.push(point);
+                    }
+                    startX = endX;
+                    startY = endY;
+                  }
+                };
+              }
+              return mousemove;
+            };
+            if (_this.canEdit) {
+              canvas.addEventListener(events[1], mousemoveEvent(true));
+            }
+            const mouseup = function () {
+              console.log("mouseup");
+              if (_this.timer) {
+                clearTimeout(_this.timer);
+              }
+              if (_this.canEdit) {
+                _this.execStack.push({
+                  type: "line",
+                  points: points,
+                  step: _this.curStep,
+                });
+                const length = _this.execStack.reduce((prev, next) => {
+                  if (next.step == _this.curStep) {
+                    prev += next.points.length;
+                  }
+                  return prev;
+                }, 0);
+                if (length >= 30) {
+                  _this.timer = setTimeout(() => {
+                    if (_this.curStep == 2) {
+                      _this.curStep = 2.5;
+                      _this.canEdit = false;
+                      _this.animate("ears_1", 3);
+                    } else if (_this.curStep == 4) {
+                      _this.curStep = 4.5;
+                      _this.canEdit = false;
+                      _this.animate("shake_head", 5);
+                    } else if (_this.curStep == 6) {
+                      _this.curStep = 6.5;
+                      _this.canEdit = false;
+                      _this.animate("shake_body", 7);
+                    } else if (_this.curStep <= 6) {
+                      _this.canEdit = true;
+                      _this.curStep += 1;
+                    }
+                    _this.execCanvas();
+                  }, 500);
+                }
+              }
+              canvas.removeEventListener(events[1], mousemoveEvent(false));
+              canvas.removeEventListener(events[2], mouseup);
+            };
+            canvas.addEventListener(events[2], mouseup);
+          });
+        }
+        drawLine(point) {
+          const { ctx } = this;
+          ctx.beginPath();
+          ctx.moveTo(point.startX, point.startY);
+          ctx.lineTo(point.endX, point.endY);
+          if (point.style) {
+            for (let key in point.style) {
+              ctx[key] = point.style[key];
+            }
+          }
+          ctx.stroke();
+          ctx.closePath();
+        }
+        execCanvas() {
+          const { ctx, curStep, tempCtx } = this;
+          ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          tempCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          this.execStack.forEach((item) => {
+            switch (item.type) {
+              case "line": {
+                item.points.forEach((point) => {
+                  this.drawLine(point);
+                });
+                break;
+              }
+            }
+          });
+          this.drawEyes();
+          this.drawSteps(curStep);
+        }
+        back() {
+          if (this.curStep != Math.floor(this.curStep)) return;
+          if (this.curStep > 1) {
+            this.curStep -= 1;
+          }
+          this.canEdit = true;
+          // if (this.execStack.length < 1) return;
+          this.execStack = this.execStack.filter(
+            (item) => item.step < this.curStep
+          );
+          console.log(this.execStack);
+          this.execCanvas();
+        }
+        drawCurve({ list, wrapperStyle, innerStyle }) {
+          const { tempCtx: ctx } = this;
+          list.forEach((point) => {
+            const { x, y, list } = point;
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.bezierCurveTo(...list);
+            for (let key in wrapperStyle) {
+              ctx[key] = wrapperStyle[key];
+            }
+            ctx.stroke();
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.bezierCurveTo(...list);
+            for (let key in innerStyle) {
+              if (key == "lineDash") {
+                ctx.setLineDash(innerStyle[key]);
+              }
+              ctx[key] = innerStyle[key];
+            }
+            ctx.stroke();
+            ctx.restore();
+          });
+        }
+        drawSteps(step) {
+          if (step > 6 || Math.floor(step) != step) return;
+          if (this.execStep[step]) {
+            this.drawCurve(this.execStep[step]);
+            return;
+          }
+          const wrapperStyle = {
+            lineWidth: "30",
+            strokeStyle: this.tipPathColor[0],
+          };
+          const innerStyle = {
+            lineWidth: "3",
+            strokeStyle: this.tipPathColor[1],
+            lineDash: [15, 12],
+          };
+          const point = {
+            step,
+            wrapperStyle,
+            innerStyle,
+            type: "step",
+            list: [],
+            lineLength: 50,
+            centerPoints: [],
+          };
+          // 关键点
+          const points = [
+            [140, 180],
+            [180, 170],
+            [230, 200],
+            [170, 315],
+            [160, 310],
+            [125, 390],
+            [165, 470],
+            [220, 310],
+            [235, 400],
+          ];
+          const { tempCtx: ctx, tempCanvas: canvas } = this;
+          switch (step) {
+            case 1: {
+              // 左耳
+              const [x, y] = points[0];
+              const [x1, y1] = points[1];
+              const list = [x - 105, y - 180, x + 40, y - 125, x1, y1];
+              point.list.push({ x, y, list });
+              point.lineLength = 70;
+              point.centerPoints.push([(x1 + x) / 2, (y1 + y) / 2]);
+              this.drawCurve(point);
+              break;
+            }
+            case 2: {
+              // 右耳
+              const [x, y] = points[1];
+              const [x1, y1] = points[2];
+              const list = [x + 125, y - 200, x + 180, y - 35, x1, y1];
+              point.list.push({ x, y, list });
+              point.lineLength = 70;
+              point.centerPoints.push([(x1 + x) / 2, (y1 + y) / 2]);
+              this.drawCurve(point);
+              break;
+            }
+            case 3: {
+              //  左脸
+              const [x, y] = points[0];
+              const [x1, y1] = points[3];
+              const list = [x - 100, y + 80, x - 22, y + 130, x1, y1];
+              point.list.push({ x, y, list });
+              point.lineLength = 60;
+              point.centerPoints.push([
+                (points[0][0] + points[2][0]) / 2,
+                (points[0][1] + points[3][1]) / 2,
+              ]);
+              this.drawCurve(point);
+              break;
+            }
+            case 4: {
+              //  右脸
+              const [x, y] = points[2];
+              const [x1, y1] = points[3];
+              const list = [x + 50, y + 60, x + 45, y + 120, x1, y1];
+              point.list.push({ x, y, list });
+              point.lineLength = 60;
+              point.centerPoints.push([
+                (points[0][0] + points[2][0]) / 2,
+                (points[0][1] + points[3][1]) / 2,
+              ]);
+              this.drawCurve(point);
+              break;
+            }
+            case 5: {
+              // 左身体
+              const [x, y] = points[4];
+              const [x1, y1] = points[5];
+              const [x2, y2] = points[6];
+              const list1 = [x - 160, y - 5, x - 140, y + 100, x1, y1];
+              const list2 = [x1 - 120, y1 + 130, x1 - 40, y1 + 200, x2, y2];
+              point.list.push({ x, y, list: list1 });
+              point.list.push({ x: x1, y: y1, list: list2 });
+              point.lineLength = 150;
+              point.centerPoints.push([x1, y1]);
+              this.drawCurve(point);
+              break;
+            }
+            case 6: {
+              // 右身体
+              const [x, y] = points[7];
+              const [x1, y1] = points[8];
+              const [x2, y2] = points[6];
+              const list1 = [x + 160, y - 5, x + 140, y + 100, x1, y1];
+              const list2 = [x1 + 120, y1 + 130, x1 + 40, y1 + 200, x2, y2];
+              point.list.push({ x, y, list: list1 });
+              point.list.push({ x: x1, y: y1, list: list2 });
+              point.lineLength = 150;
+              point.centerPoints.push([x1, y1]);
+              this.drawCurve(point);
+              break;
+            }
+          }
+          point.tempImageData = this.getImageData(canvas, ctx);
+          this.execStep[step] = point;
+          this.canEdit = true;
+        }
+        getImageData(canvas, ctx) {
+          const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+          const gap = 4;
+          const points = [];
+          const length = data.length;
+          for (let i = 0, wl = canvas.width * gap; i < length; i += gap) {
+            if (data[i + gap - 1] == 255) {
+              // 根据透明度判断
+              const x = (i % wl) / gap;
+              const y = Math.ceil(i / wl);
+              points.push([x, y]);
+            }
+          }
+          return points;
+        }
+      }
+      const Rabbit = new RabbitPainting();
+      Rabbit.init();
+      function back() {
+        Rabbit.back();
+      }
+    </script>
+  </body>
+</html>
